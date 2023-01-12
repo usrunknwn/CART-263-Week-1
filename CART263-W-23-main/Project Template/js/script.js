@@ -14,6 +14,7 @@ Description of preload
 */
 function preload() {
 
+
 }
 
 
@@ -21,7 +22,8 @@ function preload() {
 Description of setup
 */
 function setup() {
-
+    createCanvas(500,500);
+    background(0,210,0);
 }
 
 
