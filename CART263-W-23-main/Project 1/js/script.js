@@ -122,14 +122,14 @@ function setup() {
 }
 
 function draw() {
-  beginLayer();
+  
   background(110, 112, 115);
   for (let i = 0; i < ball.length; i++) {
     ball[i].move();
     ball[i].display();
     //showing the ball values
   }
-  endLayer();
+ 
 
   beginLayer();
   stroke(0, 18);
