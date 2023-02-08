@@ -1,117 +1,16 @@
 /**
-pong
+Project 1 Lost In the Forest 
 Damian
 */
 
 "use strict";
-/*
-let p1Score = 0; 
-let p2Score = 0;
-let Paddle1Y;
-let Paddle2Y;
-let paddleSpeed = 5;
-let paddleHeight = 30;
-
-let cposteam1;
-
-var ballX =0; 
-var ballY = 0;
- var ballSize = 10; 
- var BallSpeedX;
- var BallSpeedY;
-
-function setup() {
-    createCanvas(500,500);
-
-
-    Paddle1Y = height/2;
-    Paddle2Y = height/2;
-    SpawnBall();
-
-}
-
-function draw() {
-background(100);
- paddleTeam1();
- paddleTeam2();
- ballMove();
- handleScore();
- movePaddle();
-
-}
-
-function handleScore(){
-    if(ballX >= width){
-        p1Score++;
-        SpawnBall();
-    } else if(ballX <= 0){
-        p2Score++;
-        SpawnBall();
-    }
-    print("SCORE" + p1Score + "" + p2Score);
-}
-
-function paddleTeam1(){
-    fill(0,255,0);
-    rect(10,Paddle1Y,10,paddleHeight);
-}
-
-function paddleTeam2(){
-    fill(255,0,0);
-    rect(width-10,Paddle2Y,10,paddleHeight);
-}
-
-function SpawnBall(){
-    ellipseMode(CENTER);
-    ballX = width/2;
-    ballY = height/2;
-    BallSpeedX = -3;
-    BallSpeedY = 6;
-
-    if(p1Score >= 10 || p2Score >= 10){
-        BallSpeedX = 0;
-        BallSpeedY = 0;
-    }
-}
-
-function ballMove(){
-    circle(ballX, ballY, ballSize);
-
-    ballX += BallSpeedX;
-   // ballY += BallSpeedY;
-//creating a box saying less than these coordinates and more than coordinates 
-    if(ballY >= 490 || ballY <= 10){
-        BallSpeedY *= -1;
-    }
-    if(ballX>=490 && ballY >= Paddle2Y && ballY <= Paddle2Y + paddleHeight){
-        BallSpeedX *= -1;
-    }  
-    if(ballX<=10 && ballY >= Paddle1Y && ballY <= Paddle1Y + paddleHeight){
-        BallSpeedX *= -1;
-    }
-}
-
-/*
-function keyPressed(){
-    if(keyCode == Up_ARROW){
-        paddle2Y -= paddleSpeed;
-    } else if (keyCode == DOWN_ARROW){
-        paddle2Y += paddleSpeed;
-    } else if (keyCode == 87){
-        paddle1Y -= paddleSpeed;
-    } else if (keyCode == 83){
-        paddle1Y += paddleSpeed;
-    }
- 
-}
-*/
-
 //VARIABLES
 var change = 1;
 var diam = 30;
 var t;
 var timealiive = 0;
 var breath = 0;
+var dark = 0;
 
 var tf = false;
 let ball = []; // Declare array
@@ -142,11 +41,11 @@ function draw() {
     }
   }
   //CHANGE IN COLOR
-  timealiive += 0.07;
+  timealiive += 0.03;
 
   print(c);
 
-  /*
+
   beginLayer();
 
   stroke(0, 18);
@@ -163,37 +62,40 @@ function draw() {
   var y4 = height * noise(t + 85);
 
   // diameter change
-  breath += 0.1;
+  breath += 0.02;
   diam += change;
   if (diam > 10 + breath) {
     change = -change;
   } else if (diam < 10) {
     change = -change;
   }
+  //COLOR CHANGE
+  dark += 0.03;
 
   //TREE BRANCH: defining square rec values and inputting the change in x and y val
   stroke(0, 18);
-  fill(55, 55, 55);
+  fill(55-dark, 55-dark, 55-dark);
   rect(x1, y1, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
-  fill(63, 55, 50);
+  fill(63-dark, 55-dark, 50-dark);
   rect(x2, y2, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
-  fill(80, 80, 80);
+  fill(80-dark, 80-dark, 80-dark);
   rect(x3, y3, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
-  fill(53, 55, 50);
+  fill(53-dark, 55-dark, 50-dark);
   rect(x4, y4, diam, diam, 5);
-  fill(53, 50, 50);
+  fill(53-dark, 50-dark, 50-dark);
   rect(x1, y1, diam, diam, 5);
 
   //SPEED OF BRANCH
-  t += 0.006;
+  t += 0.002;
   endLayer();
-  */
+ 
+
 }
 
 function mousePressed() {
@@ -237,4 +139,3 @@ class Particle {
     }
   }
 }
-
