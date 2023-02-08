@@ -106,15 +106,18 @@ function keyPressed(){
 }
 */
 
+//VARIABLES
 var change = 1;
 var diam = 30;
 var t;
+var timealiive = 0;
+var breath = 0;
 
 var tf = false;
-
 let ball = []; // Declare array
+
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(800, 800);
   for (let i = 0; i < 500; i++) {
     ball[i] = new Particle();
   }
@@ -122,19 +125,34 @@ function setup() {
 }
 
 function draw() {
-  
-  background(110, 112, 115);
+  background(30, 35, 35);
+  /*
   for (let i = 0; i < ball.length; i++) {
     ball[i].move();
     ball[i].display();
     //showing the ball values
   }
- 
+*/
+  //FOG: from https://genekogan.com/code/p5js-perlin-noise/
+  for (var x = 0; x < width; x += 10) {
+    for (var y = 0; y < height; y += 10) {
+      var c = 70 * noise(0.01 * x, 0.01 * y) + timealiive;
+      fill(c);
+      rect(x, y, 10, 10);
+    }
+  }
+  //CHANGE IN COLOR
+  timealiive += 0.07;
 
+  print(c);
+
+  /*
   beginLayer();
+
   stroke(0, 18);
   fill(18, 18, 18);
 
+  // X&Y CHANGE: defining how x and y changes overtime
   var x1 = width * noise(t + 0);
   var x2 = width * noise(t + 25);
   var x3 = width * noise(t + 35);
@@ -145,20 +163,21 @@ function draw() {
   var y4 = height * noise(t + 85);
 
   // diameter change
-  /*
+  breath += 0.1;
   diam += change;
-  if (diam > 30) {
+  if (diam > 10 + breath) {
     change = -change;
-  } else if (diam < 20) {
+  } else if (diam < 10) {
     change = -change;
   }
-*/
+
+  //TREE BRANCH: defining square rec values and inputting the change in x and y val
   stroke(0, 18);
-  fill(50, 50, 50);
+  fill(55, 55, 55);
   rect(x1, y1, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
-  fill(70, 60, 60);
+  fill(63, 55, 50);
   rect(x2, y2, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
@@ -166,12 +185,15 @@ function draw() {
   rect(x3, y3, diam, diam, 5);
   rect(x1, y1, diam, diam, 5);
   stroke(0, 18);
-  fill(70, 60, 60);
+  fill(53, 55, 50);
   rect(x4, y4, diam, diam, 5);
+  fill(53, 50, 50);
   rect(x1, y1, diam, diam, 5);
 
-  t += 0.0007;
+  //SPEED OF BRANCH
+  t += 0.006;
   endLayer();
+  */
 }
 
 function mousePressed() {
@@ -215,3 +237,4 @@ class Particle {
     }
   }
 }
+
