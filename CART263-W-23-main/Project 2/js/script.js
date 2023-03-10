@@ -2,6 +2,7 @@
 
 let table;
 let dataPoints = [];
+let categoryNames = ["Physical Harm", "Dependence", "Social Harm"];
 
 //Loading our CSV as a table
 function preload() {
@@ -26,10 +27,7 @@ function setup() {
   }
 }
 
-//change in order of substances -> shape
-//look into icons and background, also 1 topic
-// draw graph x3 to show each category independently
-//then dont have all substance names or numbers and just show names if you hover. look into
+
 
 //Class to define objects
 class DataPoint {
@@ -60,9 +58,10 @@ class DataPoint {
 
     //Dependence Rep
     stroke(90, 220, 130);
-    fill(200, 200, 200, 8);
+    fill(90, 200, 130, 8);
     rect(50, -280, table.getString(1, 2) * 10, table.getString(1, 2) * 10, 10);
   }
+  //Drawing titles for each name 
   drawTitle() {
     noStroke();
     fill(0);
@@ -83,28 +82,7 @@ function draw() {
   console.log(dataPoints.length);
   let angleIncrement = 360 / noVertices;
 
-  // Draw axis lines
-  stroke(200);
-  strokeWeight(1);
-  //Loop draw lines = "noVerticies" or draw no of lines from 0 - whatever about of rows
-  for (let i = 0; i < noVertices; i++) {
-    //Draw lines in a circle)
-    let angle = i * angleIncrement;
-    let x = cos(angle) * (150 * 1.5);
-    let y = sin(angle) * (150 * 1.5);
-    line(0, 0, x, y);
-    push();
-    stroke(200);
-    strokeWeight(1);
-    noFill();
-    ellipse(0, 0, 56 * 2, 56 * 2);
-    ellipse(0, 0, 56 * 4, 56 * 4);
-    ellipse(0, 0, 56 * 6, 56 * 6);
-    ellipse(0, 0, 56 * 8, 56 * 8);
-
-    pop();
-  }
-
+ 
   // Draw data Physical Harm
   stroke(200, 200, 200);
   strokeWeight(4);
@@ -162,104 +140,14 @@ function draw() {
     text(dataPoints[i].Substance, x, y);
   }
 
-  // Labels for ratings
-  noStroke();
-  fill(0);
-  textSize(8);
-  textAlign(CENTER, CENTER);
-  text("3.00", 10, -224);
-  text("2.25", 10, -168);
-  text("1.50", 10, -112);
-  text("0.75", 10, -55);
-  text("0.00", 10, -8);
 
+//Call to draw the functions 
   for (var i = 0; i < dataPoints.length; i++) {
     dataPoints[i].drawBasic();
     dataPoints[i].drawTitle();
   }
+
 }
 
-/* THIS IS SUPPOSED TO BE 20 SIDED POLYGON CALL FUNCTION BUT NOT WORKIE
-function polygon(x, y, radius, npoints) {
-  let uhh = TWO_PI / npoints;
-  beginShape();
-  for (let a = 0; a < TWO_PI; a += uhh) {
-    let sx = x + cos(a) * radius;
-    let sy = y + sin(a) * radius;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
-}
-*/
 
-//Object constructor refrence
 
-// let table;
-// let points = [];
-// function preload() {
-//   table = loadTable("EVA_Data.csv", "csv", "header");
-// }
-// function setup() {
-//   createCanvas(800, 800);
-//   background(0);
-//   for (var r = 0; r < table.getRowCount(); r++) {
-//     // Cycle through each row of the table
-//     points[r] = new DataPoint(
-//       table.getString(r, 1),
-//       table.getString(r, 2),
-//       table.getString(r, 4),
-//       table.getString(r, 3),
-//       table.getString(r, 0)
-//     );
-//     // Pass through the values in each row
-//   }
-// }
-// class DataPoint {
-//   constructor(country, name, duration, ID) {
-//     // Add each data point to the object
-//     this.country = country;
-//     this.duration = duration;
-//     this.name = name;
-//     this.ID = ID;
-//     this.x;
-//     this.y;
-//   }
-//   drawBasic() {
-//     this.x = random(width);
-//     this.y = random(height);
-//     noStroke();
-//     ellipse(random(width), random(height), int(this.duration) * 3);
-//   }
-//   drawCircle() {
-//     this.radius = 150;
-//     this.t = 0;
-//     this.angle = map(this.ID, 0, table.getRowCount(), 0, 1) * Math.PI * 2;
-//     this.x = Math.cos(this.angle) * this.radius + width / 2;
-//     this.y = Math.sin(this.angle) * this.radius + height / 2;
-//     noStroke();
-//     fill(0, 200, 20, 40);
-//     ellipse(this.x, this.y, int(this.duration) * 3);
-//     fill(0, 100, 200);
-//     textSize(5);
-//     push();
-//     if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
-//       this.t = textWidth(this.name);
-//       fill(255, 0, 0);
-//       translate(this.x, this.y);
-//       rotate(this.angle + Math.PI);
-//     } else {
-//       translate(this.x, this.y);
-//       rotate(this.angle);
-//     }
-//     text(this.name, 0 - this.t, 0);
-//     pop();
-//   }
-// }
-
-// function draw() {
-//   background(0);
-//   for (var i = 0; i < points.length; i++) {
-//     points[i].drawBasic();
-//     points[i].drawCircle();
-//   }
-// }
